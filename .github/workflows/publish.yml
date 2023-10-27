@@ -11,15 +11,20 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-
-      - uses: snok/install-poetry@v1
+      - uses: actions/upload-pages-artifact@v2
         with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
+          path: docs
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-          cache: poetry
-
-      - run: poetry install
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
