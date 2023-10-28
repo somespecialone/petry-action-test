@@ -12,21 +12,10 @@ jobs:
       dist-file: ${{ steps.pack.outputs.dist-file }}
     steps:
       - uses: actions/checkout@v4
-#      - uses: pnpm/action-setup@v2
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: 18
-#          cache: pnpm
-#      - run: pnpm install
-
-#      - name: Build lib
-#        run: pnpm --filter "vuecomotive-scroll" lib:build
-#
       - name: Pack distribution package
         id: pack
         working-directory: lib
         run: |
-#          pnpm pack
           echo "dist-file=$(find -name '*.tgz')" >> $GITHUB_OUTPUT
           cp *.tgz ..
 
@@ -40,9 +29,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 10
-#    environment:
-#      name: npm
-#      url: https://www.npmjs.com/package/vuecomotive-scroll
     steps:
       - uses: actions/download-artifact@v3
         with:
@@ -53,9 +39,3 @@ jobs:
           find -name '*.tgz'
           echo "${{ needs.build.outputs.dist-file }}"
           if test -f "${{ needs.build.outputs.dist-file }}"; then echo "tar exists."; fi
-
-#      - name: Publish package distributions to NPM
-#        uses: JS-DevTools/npm-publish@v3
-#        with:
-#          token: ${{ secrets.NODE_AUTH_TOKEN }}
-#          package: ${{ needs.build.outputs.dist-file }}
