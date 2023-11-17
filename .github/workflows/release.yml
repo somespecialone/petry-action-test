@@ -14,17 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Create changelog
-        uses: heinrichreimer/action-github-changelog-generator@v2.3
-        with:
-          token: ${{ github.token }}
-          onlyLastTag: true
-          verbose: true
-          stripGeneratorNotice: true
-
-      - run: cat CHANGELOG.md
-
       - name: Create & publish release
         uses: softprops/action-gh-release@v0.1.15
         with:
           body_path: CHANGELOG.md
+          generate_release_notes: true
