@@ -17,5 +17,4 @@ jobs:
       - name: Create & publish release
         uses: softprops/action-gh-release@v0.1.15
         with:
-          body_path: CHANGELOG.md
           generate_release_notes: true
