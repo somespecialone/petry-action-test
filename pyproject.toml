@@ -2,7 +2,7 @@
 name = "petry-action-test"
 version = "0.1.0"
 description = ""
-authors = ["somespecialone <tkachenkodmitriy@yahoo.com>"]
+authors = ["somespecialone 1 <tkachenkodmitriy@yahoo.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
