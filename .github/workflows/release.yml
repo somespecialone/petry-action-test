@@ -9,14 +9,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
       - name: Create changelog
         id: changelog
         uses: heinrichreimer/action-github-changelog-generator@v2.3
-#        with:
-#          token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ github.token }}
+
+      - run: cat CHANGELOG.md
 
       - name: Create & publish release
         uses: softprops/action-gh-release@v0.1.15
