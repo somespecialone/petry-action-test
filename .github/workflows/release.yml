@@ -1,0 +1,24 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create changelog
+        id: changelog
+        uses: heinrichreimer/action-github-changelog-generator@v2.3
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create & publish release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          body: ${{ steps.changelog.outputs.changelog }}
