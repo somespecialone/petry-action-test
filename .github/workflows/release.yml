@@ -21,7 +21,6 @@ jobs:
           onlyLastTag: true
           verbose: true
           stripGeneratorNotice: true
-          stripHeaders: true
 
       - run: cat CHANGELOG.md
 
